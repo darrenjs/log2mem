@@ -1,2 +1,6 @@
-C/C++ high performance low-latency lightweight memory-mapped diagnostic logger
-==============================================================================
+log2mem
+=======
+
+##C/C++  low-latency lightweight in-memory diagnostic logger
+
+------------------------------------------------------------------------------
