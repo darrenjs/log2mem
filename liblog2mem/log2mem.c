@@ -66,6 +66,9 @@ static int g_log2mem_errno = 0;
 /* */
 static volatile int g_log2mem_lock = 0;
 
+
+static volatile int g_log2mem_dummytotal = 0;
+
 /* These rdtsc implementations are based on code in ACE 6.1.0.  The "memory"
  * clobber is probably present as an attempt to serialise the rdtsc. */
 #if defined(__i386__)
@@ -247,6 +250,13 @@ struct log2mem_handle * log2mem_attach (const char* filename)
 
     // TODO: cleanup();
   }
+
+  // read from memory
+  size_t i;
+  const char* chptr = (char*) addr;
+  for (i=0; i < filestat.st_size; i++, chptr++)
+    g_log2mem_dummytotal += *chptr;
+
 
   /* set up our pointers the the mm sections */
 
