@@ -629,7 +629,7 @@ void log2mem_append_int(void* r, int d)
 }
 
 //----------------------------------------------------------------------
-void log2mem_append_str3(void* r, const char* str, int len)
+void log2mem_append_str2(void* r, const char* str, int len)
 {
   if (r && str)
   {
@@ -638,7 +638,7 @@ void log2mem_append_str3(void* r, const char* str, int len)
 }
 
 //----------------------------------------------------------------------
-void log2mem_append_str2(void* r, const char* str)
+void log2mem_append_str(void* r, const char* str)
 {
   if (r && str)
   {

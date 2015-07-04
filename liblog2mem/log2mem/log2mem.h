@@ -90,8 +90,8 @@ void* log2mem_write(const char* msg, const char* filename, int lineno);
 void* log2mem_get_row(const char* filename, int lineno);
 
 /* Append data to previously obtained logging row */
-void log2mem_append_str2(void* rowptr,  const char* str);
-void log2mem_append_str3(void* rowptr,  const char* str, int len);
+void log2mem_append_str(void* rowptr,  const char* str);
+void log2mem_append_str2(void* rowptr,  const char* str, int len);
 void log2mem_append_int(void* rowptr,   int);
 void log2mem_append_uint(void* rowptr,  unsigned int);
 void log2mem_append_long(void* rowptr,  long);

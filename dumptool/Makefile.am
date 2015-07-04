@@ -9,12 +9,12 @@ AM_LDFLAGS=
 
 LDADD = -L../liblog2mem -llog2mem -lrt
 
-bin_PROGRAMS=log2mem-dump
+bin_PROGRAMS=log2mem-util
 #noinst_PROGRAMS=server_demo
 
 # link statically for the dump tool, so that it is easier to copy around
-log2mem_dump_LDFLAGS=-static
-log2mem_dump_SOURCES=log2memdump.c
+log2mem_util_LDFLAGS=-static
+log2mem_util_SOURCES=log2memutil.c
 
 # server_dem
 #server_demo_SOURCES=server_demo.cc

@@ -84,11 +84,11 @@ void loop(const char* s)
 
   sleep(4);
   void * rowptr = log2mem_get_row(__FILE__, __LINE__);
-  log2mem_append_str2(rowptr, "loop name:");
-  log2mem_append_str2(rowptr, s);
-  log2mem_append_str2(rowptr, "completed after");
+  log2mem_append_str(rowptr, "loop name:");
+  log2mem_append_str(rowptr, s);
+  log2mem_append_str(rowptr, "completed after");
   log2mem_append_int(rowptr, iterations);
-  log2mem_append_str2(rowptr, "iterations");
+  log2mem_append_str(rowptr, "iterations");
 
 }
 
@@ -122,8 +122,8 @@ void flow1(int idoffset)
       void* row = log2mem_time_event3(1, id+j, "subseq_beg");
 
       /* log the ID of the preseq*/
-      log2mem_append_str2(row, "preseqid");
-      log2mem_append_str2(row, "XXYYZZ");
+      log2mem_append_str(row, "preseqid");
+      log2mem_append_str(row, "XXYYZZ");
       log2mem_append_int(row, id);
 
       log2mem_time_event2(1, id+j);
@@ -145,8 +145,8 @@ void flow1(int idoffset)
     {
       void* r = log2mem_time_event3(0, id, "TEST");
 
-      log2mem_append_str2(r, "example_string");
-      log2mem_append_str3(r,  "str2", 4);
+      log2mem_append_str(r, "example_string");
+      log2mem_append_str2(r,  "str2", 4);
       log2mem_append_int(r,   -1024);
       log2mem_append_uint(r,  +1024);
       log2mem_append_long(r,  -92233720368547758UL);
@@ -209,12 +209,15 @@ int main(int argc, char** argv)
   const char* user_filename = 0;
   int i;
 
+  printf ("argc: %d\n", argc);
+
   for (i = 1; i < argc; i++)
   {
     if (strcmp(argv[i], MEMMAPFILE_SWITCH)==0)
     {
       i++;
       if (i>=argc) die("missing arg for option " MEMMAPFILE_SWITCH);
+      user_filename = argv[i];
     }
     else if (strcmp(argv[i], HELP_SWITCH)==0)
     {
@@ -321,6 +324,23 @@ int main(int argc, char** argv)
   printf("==> to trigger loop exit, use the log2memdump tool, eg:\n");
   printf("\n\t./log2mem-dump   %s --int[%d]=1\n",log2mem_filename(),stopflag_variable_id);
 
+
+
+  int j = 0;
+  void * rptr;
+  for (j =0 ; j < 1000; j++)
+  {
+//    MEMLOGWRITE("function entered");  // 450 nanosec
+
+// 130 nanosec on 2.5 GHz Core i5 2.50GHz
+
+
+    rptr = log2mem_get_row(__FILE__, __LINE__);
+    log2mem_append_str(rptr,  "function is:");
+    log2mem_append_double(rptr,  j*17.0);
+    log2mem_append_long(rptr,  j*17);
+  }
+
   while (1)
   {
     sleep(1);
@@ -337,8 +357,8 @@ int main(int argc, char** argv)
   }
 
   rowptr = log2mem_get_row(__FILE__,__LINE__);
-  log2mem_append_str2(rowptr, "application ending");
-  log2mem_append_str2(rowptr, "normally");
+  log2mem_append_str(rowptr, "application ending");
+  log2mem_append_str(rowptr, "normally");
 
   return 0;
 }
