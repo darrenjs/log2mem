@@ -104,7 +104,7 @@ AC_CONFIG_FILES([
 Makefile
 liblog2mem/Makefile
 dumptool/Makefile
-test/Makefile
+examples/interact/Makefile
 qtgui/Makefile
 ])
 
