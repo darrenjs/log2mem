@@ -6,7 +6,7 @@
 AM_CPPFLAGS = -I$(top_srcdir)/liblog2mem -Wall -pthread
 
 # NOTE: -lrt added for posix clock support
-AM_LDFLAGS=-L../liblog2mem -llog2mem -lrt -pthread
+AM_LDFLAGS=-L$(top_builddir)/liblog2mem -llog2mem -lrt -pthread
 
 noinst_PROGRAMS=example
 #noinst_PROGRAMS=server_demo

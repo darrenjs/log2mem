@@ -84,7 +84,7 @@ fi
 
 #========== User options ==========
 
-export DIRS="liblog2mem dumptool test"
+export DIRS="liblog2mem dumptool examples/interact"
 extrabuild=
 dnl QT option
 AC_ARG_ENABLE([gui],
