@@ -84,7 +84,7 @@ fi
 
 #========== User options ==========
 
-export DIRS="liblog2mem dumptool examples/interact"
+export DIRS="liblog2mem util examples/interact"
 extrabuild=
 dnl QT option
 AC_ARG_ENABLE([gui],
@@ -103,7 +103,7 @@ AC_SUBST(DIRS)
 AC_CONFIG_FILES([
 Makefile
 liblog2mem/Makefile
-dumptool/Makefile
+util/Makefile
 examples/interact/Makefile
 qtgui/Makefile
 ])
