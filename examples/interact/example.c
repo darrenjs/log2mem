@@ -321,8 +321,8 @@ int main(int argc, char** argv)
   printf("waiting until variable, id=%d, is set to 1\n",
          stopflag_variable_id);
 
-  printf("==> to trigger loop exit, use the log2memdump tool, eg:\n");
-  printf("\n\t./log2mem-dump   %s --int[%d]=1\n",log2mem_filename(),stopflag_variable_id);
+  printf("==> to trigger loop exit, use the log2mem-util, eg:\n");
+  printf("\n\t./log2mem-util   %s --int[%d]=1\n",log2mem_filename(),stopflag_variable_id);
 
 
 
