@@ -13,12 +13,10 @@ subtles bugs, as threads race to both use some data source.  Low latency code is
 general term of tasks which have to operate on the order of tens of
 microseconds.
 
-
 Most developers are familer with the two basic approachs to debugging: execute
 the code in a debugger; or litter the source with increasingly targeted and
 detailed printf/std::cout statements.  However for multithreaded or low latency
 code, both approaches often fail to work.
-
 
 The problem is time. Whether or not a bug gets triggered can be dependent on not
 just a program's inputs but also on its run-time speed.  Stepping through the
@@ -30,12 +28,10 @@ and these too impede program speed. The developer is left with the frustrating
 and not uncommon condumdrun that the act of debuging causes the problem to
 temporarily disappear. [better word for condundrum?]
 
-The excellent blog Preshing on Programming [] also identifies this problem of
+The excellent blog Preshing on Programming also identifies this problem of
 debugging multi-threaded code, and log2mem is inspired by the solution described
-there.
+there. [Lightweight In-Memory Logging, 22 May 2012, http://preshing.com/20120522/lightweight-in-memory-logging]
 
-[TODO: need the reference to the blog post
-[Lightweight In-Memory Logging, 22 May 2012]
 
 Additionally, for some classes of program typically characterised as low latency
 or real-time, proper program execution is also dependent on it running at normal
