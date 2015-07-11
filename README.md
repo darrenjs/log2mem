@@ -81,22 +81,24 @@ Below is a basic "hello world" example of using log2mem.  Integration into your
 code requires that the header file `log2mem.h` is included and the library
 `liblog2mem` added to the link line.
 
-    #include <iostream>
-    #include <log2mem/log2mem.h>
+```c++
+#include <log2mem/log2mem.h>
+#include <iostream>
 
-    int main(int, char**)
-    {
-        std::cout << "hello world" << std::endl;
+int main(int, char**)
+{
+    std::cout << "hello world" << std::endl;
 
-        // obtain a logging row, and write a simple message & value
-        void * rowptr = log2mem_get_row(MEMLOGFL);
-        log2mem_append_str2(rowptr, "hello world");
-        log2mem_append_int(rowptr, 100);
+    // obtain a logging row, and write a simple message & value
+    void * rowptr = log2mem_get_row(MEMLOGFL);
+    log2mem_append_str2(rowptr, "hello world");
+    log2mem_append_int(rowptr, 100);
 
-        // print location of the memmap
-        std::cout << "log2mem memmap: " << log2mem_filename() << std::endl;
-        return 0;
-    }
+    // print location of the memmap
+    std::cout << "log2mem memmap: " << log2mem_filename() << std::endl;
+    return 0;
+}
+```
 
 This could be complied with the following kind of command, which needs to
 specify the location where log2mem has been installed.
