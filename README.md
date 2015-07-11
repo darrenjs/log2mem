@@ -78,8 +78,8 @@ Hello World
 ===========
 
 Below is a basic "hello world" example of using log2mem.  Integration into your
-code requires that the header file log2mem.h is included and the library
-liblog2mem added to the link line.
+code requires that the header file `log2mem.h` is included and the library
+`liblog2mem` added to the link line.
 
     #include <iostream>
     #include <log2mem/log2mem.h>
