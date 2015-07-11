@@ -28,7 +28,7 @@ and these too impede program speed. The developer is left with the frustrating
 and not uncommon condumdrun that the act of debuging causes the problem to
 temporarily disappear. [better word for condundrum?]
 
-The excellent blog Preshing on Programming also identifies this problem of
+The excellent blog *Preshing on Programming* also identifies this problem of
 debugging multi-threaded code, and log2mem is inspired by the solution described
 there. [Lightweight In-Memory Logging, 22 May 2012, http://preshing.com/20120522/lightweight-in-memory-logging]
 
