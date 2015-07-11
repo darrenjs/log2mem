@@ -1,11 +1,12 @@
 log2mem
 =======
 
-log2mem is a high-performance diagnostic C/C++ logger designed to serve as a debugging
-tool when dealing with bugs and race conditions in multi-threaded or low latency
-code.
+log2mem is a high-performance diagnostic C/C++ logger designed to serve as a
+debugging tool when dealing with bugs and race conditions in multi-threaded or
+low latency code.
 
 [describe the nautre of the application more?]
+[say why these kinds of bugs are hard]
 
 ie, microsecond level timings multi threaded code introduces a new class of
 subtles bugs, as threads race to both use some data source.  Low latency code is
@@ -30,26 +31,26 @@ and not uncommon condumdrun that the act of debuging causes the problem to
 temporarily disappear. [better word for condundrum?]
 
 The excellent blog Preshing on Programming [] also identifies this problem of
-debugging multi-threaded code, and infact log2mem is based on a solution
-described there.
+debugging multi-threaded code, and log2mem is inspired by the solution described
+there.
 
 [TODO: need the reference to the blog post
-
 [Lightweight In-Memory Logging, 22 May 2012]
 
-Additionally, for some class of programs typically characterised as low latency
+Additionally, for some classes of program typically characterised as low latency
 or real-time, proper program execution is also dependent on it running at normal
-speed (eg software for robot contro or processing live finanical market data).
+speed (e.g. software for robot contro or processing live finanical market data).
 So any runtime slow introduced by debugging techniques might not even allow for
 correct functionality, let alone tickling the bug into appearence.
 
 Use of application specific asynchronous loggers is sometimes an option. However
 they are often not designed or implemented with low latency in mind (e.g. they
 typically build strings), and so again their usage can adveresly impact program
-speed.  Additionally such loggers might not be readily accesible at the code
-site being examined.
+speed.  Such loggers might not be readily accesible at the code site being
+examined, so even trying to use them can be painful.
 
 So what does log2mem do?
+------------------------
 
 log2mem is a tool to use for these situations when a debugger and printf can not
 be used.  It offers the rough equivalent of very high speed printf; this can
@@ -58,7 +59,7 @@ program can be run at full speed, the bug can arise, and its footprints can be
 logged.
 
 log2mem acheives high performance by writing log statements to a circular buffer
-in shared memory.  So whereas printf involves string construction and writing to
+emin shared memory.  So whereas printf involves string construction and writing to
 some kind of stream at the time of the call, log2mem instead writes the raw data
 values direct to memory. A separate tool, log2mem-util, is later used to
 inspect the shared memory and convert the raw logging data to human readable
@@ -123,20 +124,34 @@ Extra Features
 ==============
 
 In addition to diagnositc logging, log2mem offers some extra feature to help the
-process of debugging.  Well, in
-additiojs to the logger, log2meme has some other feature to help debugging.
-Theyse bcan be of use for all lopgging tasks, not just ultra high speed rint .
+process of debugging, which are useles in both normal debugging situations as
+well as with multi-threaded or real-time code.
 
 Variables & external interaction
 --------------------------------
 
-One feature is variables.  Variable can be defined in the memmap whic can be
-read nadn written, using log2mem functions.  This nice this is that these can
-also be read and wirtten to using the util tool; this give a quite methods to
-easily integrate with a program while it is running.
+The most useful extra feature is variables.  The log2mem API can be used to
+define variables that get stored in the memmap, and which can be read and
+written both by the program and by the external log2mem-util.  This provides a
+quick & easy mechanism to enable a developer to interact with a program while it
+is being debugged (e.g., to temporarily alter its course of execution, or read &
+write program state). The traditional approach to achieve this, outside of a
+debugger, is to use posix signals.
+
+The following code shows how to create a variable, and how to access it from
+outside the debugged program:
+
+
+    // create int variable, give it a name & id, and set to 0
+    int          var_id   = 1;
+    const char*  var_name = "stopflag";
+    log2mem_var_int_init(var_id, 0, var_name);
+
+    # externally set variable to 1
+    $ ./log2mem-util   /tmp/log2mem.dat --int[1]=1
 
 Counters
 --------
 
-
-[say about extra things log2mem can do]
+Another feature is counters.  The log2mem memmap can hold counters which are
+incremented via log2mem calls, and can be queried using log2mem-util.
