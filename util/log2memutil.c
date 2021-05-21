@@ -120,7 +120,8 @@ void die(const char* msg, const char * msg2)
 //----------------------------------------------------------------------
 void print_summary(struct log2mem_handle * handle)
 {
-  if (!handle) return;
+  if (!handle)
+    return;
 
   struct log2mem_layout layout;
   log2mem_calculate_layout(&handle->header->config, &layout);
@@ -603,7 +604,8 @@ const char* parse_args(int argc, const char** argv, int parseonly,
 
   for (;i < argc; i++)
   {
-    if ( strcmp(argv[i], "-h")==0 || strcmp(argv[i],"--help")==0 ) help();
+    if (strcmp(argv[i], "-h")==0 || strcmp(argv[i],"--help")==0)
+      help();
     else if (strcmp(argv[i], "-s")==0)
     {
       toshow |= eSummary;
@@ -678,7 +680,7 @@ const char* parse_args(int argc, const char** argv, int parseonly,
 
   if (!parseonly)
   {
-    //if (toshow & eSummary)  print_summary(handle);
+    if (toshow & eSummary)  print_summary(handle);
     if (toshow & eRows)     print_rows(handle);
     if (toshow & eCounters) print_counters(handle);
     if (toshow & eVars)     print_vars(handle);
